@@ -16,13 +16,71 @@
 
 import sys
 import platform
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
+
+# from PySide2 import QtCore, QtGui, QtWidgets
+# from PySide2.QtCore import (
+#     QCoreApplication,
+#     QPropertyAnimation,
+#     QDate,
+#     QDateTime,
+#     QMetaObject,
+#     QObject,
+#     QPoint,
+#     QRect,
+#     QSize,
+#     QTime,
+#     QUrl,
+#     Qt,
+#     QEvent,
+# )
+# from PySide2.QtGui import (
+#     QBrush,
+#     QColor,
+#     QConicalGradient,
+#     QCursor,
+#     QFont,
+#     QFontDatabase,
+#     QIcon,
+#     QKeySequence,
+#     QLinearGradient,
+#     QPalette,
+#     QPainter,
+#     QPixmap,
+#     QRadialGradient,
+# )
+# from PySide2.QtWidgets import *
+
+from qgis.PyQt.QtGui import QColor, QFontDatabase
+
+from qgis.PyQt.QtWidgets import QMainWindow, QAction, QWidget, QHeaderView
+
+from qgis.PyQt.QtCore import Qt, QRectF, QSize, QEvent
+
+from qgis.core import (
+    QgsApplication,
+    QgsFeature,
+    QgsRasterLayer,
+    QgsVectorLayer,
+    QgsPoint,
+    QgsPointXY,
+    QgsProject,
+    QgsGeometry,
+    QgsMapRendererJob,
+)
+
+from qgis.gui import (
+    QgsMapCanvas,
+    QgsVertexMarker,
+    QgsMapCanvasItem,
+    QgsMapToolPan,
+    QgsMapToolZoom,
+    QgsRubberBand,
+    QgsMapToolEmitPoint,
+)
 
 # GUI FILE
 from app_modules import *
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -31,8 +89,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         ## PRINT ==> SYSTEM
-        print('System: ' + platform.system())
-        print('Version: ' +platform.release())
+        print("System: " + platform.system())
+        print("Version: " + platform.release())
 
         ########################################################################
         ## START - WINDOW ATTRIBUTES
@@ -43,9 +101,9 @@ class MainWindow(QMainWindow):
         ## ==> END ##
 
         ## SET ==> WINDOW TITLE
-        self.setWindowTitle('Main Window - Python Base')
-        UIFunctions.labelTitle(self, 'Main Window - Python Base')
-        UIFunctions.labelDescription(self, 'Set text')
+        self.setWindowTitle("Main Window - Python Base")
+        UIFunctions.labelTitle(self, "Main Window - Python Base")
+        UIFunctions.labelDescription(self, "Set text")
         ## ==> END ##
 
         ## WINDOW SIZE ==> DEFAULT SIZE
@@ -59,14 +117,30 @@ class MainWindow(QMainWindow):
         ########################################################################
 
         ## ==> TOGGLE MENU SIZE
-        self.ui.btn_toggle_menu.clicked.connect(lambda: UIFunctions.toggleMenu(self, 220, True))
+        self.ui.btn_toggle_menu.clicked.connect(
+            lambda: UIFunctions.toggleMenu(self, 220, True)
+        )
         ## ==> END ##
 
         ## ==> ADD CUSTOM MENUS
         self.ui.stackedWidget.setMinimumWidth(20)
-        UIFunctions.addNewMenu(self, "HOME", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True)
-        UIFunctions.addNewMenu(self, "Add User", "btn_new_user", "url(:/16x16/icons/16x16/cil-user-follow.png)", True)
-        UIFunctions.addNewMenu(self, "Custom Widgets", "btn_widgets", "url(:/16x16/icons/16x16/cil-equalizer.png)", False)
+        UIFunctions.addNewMenu(
+            self, "HOME", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True
+        )
+        UIFunctions.addNewMenu(
+            self,
+            "Add User",
+            "btn_new_user",
+            "url(:/16x16/icons/16x16/cil-user-follow.png)",
+            True,
+        )
+        UIFunctions.addNewMenu(
+            self,
+            "Custom Widgets",
+            "btn_widgets",
+            "url(:/16x16/icons/16x16/cil-equalizer.png)",
+            False,
+        )
         ## ==> END ##
 
         # START MENU => SELECTION
@@ -80,7 +154,6 @@ class MainWindow(QMainWindow):
         ## USER ICON ==> SHOW HIDE
         UIFunctions.userIcon(self, "WM", "", True)
         ## ==> END ##
-
 
         ## ==> MOVE WINDOW / MAXIMIZE / RESTORE
         ########################################################################
@@ -108,9 +181,6 @@ class MainWindow(QMainWindow):
         ## END - WINDOW ATTRIBUTES
         ############################## ---/--/--- ##############################
 
-
-
-
         ########################################################################
         #                                                                      #
         ## START -------------- WIDGETS FUNCTIONS/PARAMETERS ---------------- ##
@@ -118,21 +188,16 @@ class MainWindow(QMainWindow):
         ## ==> USER CODES BELLOW                                              ##
         ########################################################################
 
-
-
         ## ==> QTableWidget RARAMETERS
         ########################################################################
-        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         ## ==> END ##
-
-
 
         ########################################################################
         #                                                                      #
         ## END --------------- WIDGETS FUNCTIONS/PARAMETERS ----------------- ##
         #                                                                      #
         ############################## ---/--/--- ##############################
-
 
         ## SHOW ==> MAIN WINDOW
         ########################################################################
@@ -176,8 +241,9 @@ class MainWindow(QMainWindow):
     ## EVENT ==> MOUSE DOUBLE CLICK
     ########################################################################
     def eventFilter(self, watched, event):
-        if watched == self.le and event.type() == QtCore.QEvent.MouseButtonDblClick:
+        if watched == self.le and event.type() == QEvent.MouseButtonDblClick:
             print("pos: ", event.pos())
+
     ## ==> END ##
 
     ## EVENT ==> MOUSE CLICK
@@ -185,17 +251,19 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
         if event.buttons() == Qt.LeftButton:
-            print('Mouse click: LEFT CLICK')
+            print("Mouse click: LEFT CLICK")
         if event.buttons() == Qt.RightButton:
-            print('Mouse click: RIGHT CLICK')
+            print("Mouse click: RIGHT CLICK")
         if event.buttons() == Qt.MidButton:
-            print('Mouse click: MIDDLE BUTTON')
+            print("Mouse click: MIDDLE BUTTON")
+
     ## ==> END ##
 
     ## EVENT ==> KEY PRESSED
     ########################################################################
     def keyPressEvent(self, event):
-        print('Key: ' + str(event.key()) + ' | Text Press: ' + str(event.text()))
+        print("Key: " + str(event.key()) + " | Text Press: " + str(event.text()))
+
     ## ==> END ##
 
     ## EVENT ==> RESIZE EVENT
@@ -205,16 +273,78 @@ class MainWindow(QMainWindow):
         return super(MainWindow, self).resizeEvent(event)
 
     def resizeFunction(self):
-        print('Height: ' + str(self.height()) + ' | Width: ' + str(self.width()))
+        print("Height: " + str(self.height()) + " | Width: " + str(self.width()))
+
     ## ==> END ##
 
     ########################################################################
     ## END ==> APP EVENTS
     ############################## ---/--/--- ##############################
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    QtGui.QFontDatabase.addApplicationFont('fonts/segoeui.ttf')
-    QtGui.QFontDatabase.addApplicationFont('fonts/segoeuib.ttf')
+
+def create_test_layer():
+    """ Example vector layer with a single linestring"""
+    layer_info = "LineString?crs=epsg:4326"
+    layer = QgsVectorLayer(layer_info, "MyLine", "memory")
+    pr = layer.dataProvider()
+    linstr = QgsFeature()
+    wkt = "LINESTRING (1 1, 10 15, 40 35)"
+    geom = QgsGeometry.fromWkt(wkt)
+    linstr.setGeometry(geom)
+    pr.addFeatures([linstr])
+    return layer
+
+
+def main():
+    """ Sample canvas.
+
+    https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/canvas.html
+    https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/intro.html#using-pyqgis-in-custom-applications
+
+    :return:
+    """
+
+    # Supply the path to the qgis install location.
+    # Doesn't appear necessary when running in conda with `conda-develop` set.
+    # QgsApplication.setPrefixPath(os.environ['QGIS_PREFIX'], True)
+
+    # Create a reference to the QgsApplication.
+    # Setting the second argument to True enables the GUI.  We need
+    # this since this is a custom application.
+    app = QgsApplication([], True)
+
+    # Load providers
+    app.initQgis()
+
+    # Write your code here to load some layers, use processing
+    # algorithms, etc.
+
+    # Create a test layer
+    # vlayer = create_test_layer()
+    # vlayer.updateExtents()
+
+    QFontDatabase.addApplicationFont("fonts/segoeui.ttf")
+    QFontDatabase.addApplicationFont("fonts/segoeuib.ttf")
+
     window = MainWindow()
+    window.show()
+
+    window.raise_()  # unsure
+
+    # Finally, exitQgis() is called to remove the
+    # provider and layer registries from memory
+    app.exitQgis()
     sys.exit(app.exec_())
+
+    # app.deleteLater()  # unsure
+
+
+if __name__ == "__main__":
+    main()
+
+# if __name__ == "__main__":
+#     app = QgsApplication(sys.argv)
+#     QtGui.QFontDatabase.addApplicationFont("fonts/segoeui.ttf")
+#     QtGui.QFontDatabase.addApplicationFont("fonts/segoeuib.ttf")
+#     window = MainWindow()
+#     sys.exit(app.exec_())

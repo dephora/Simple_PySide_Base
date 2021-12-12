@@ -17,6 +17,74 @@
 ## ==> GUI FILE
 from main import *
 
+from qgis.PyQt.QtGui import QColor, QPalette, QBrush, QFont, QIcon
+
+from qgis.PyQt.QtWidgets import (
+    QMainWindow,
+    QAction,
+    QFrame,
+    QVBoxLayout,
+    QWidget,
+    QHBoxLayout,
+    QSizePolicy,
+    QPushButton,
+    QLabel,
+    QStackedWidget,
+    QGridLayout,
+    QLineEdit,
+    QCheckBox,
+    QRadioButton,
+    QSlider,
+    QScrollBar,
+    QScrollArea,
+    QPlainTextEdit,
+    QComboBox,
+    QCommandLinkButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QAbstractScrollArea,
+    QAbstractItemView,
+    QGraphicsDropShadowEffect,
+    QSizeGrip,
+    QStyle,
+)
+
+from qgis.PyQt.QtCore import (
+    Qt,
+    QRectF,
+    QSize,
+    QMetaObject,
+    QCoreApplication,
+    QRect,
+    QEasingCurve,
+    QPropertyAnimation,
+    QTimer,
+    QEvent,
+)
+
+from qgis.core import (
+    QgsApplication,
+    QgsFeature,
+    QgsRasterLayer,
+    QgsVectorLayer,
+    QgsPoint,
+    QgsPointXY,
+    QgsProject,
+    QgsGeometry,
+    QgsMapRendererJob,
+    StyleCategories,
+)
+
+from qgis.gui import (
+    QgsMapCanvas,
+    QgsVertexMarker,
+    QgsMapCanvasItem,
+    QgsMapToolPan,
+    QgsMapToolZoom,
+    QgsRubberBand,
+    QgsMapToolEmitPoint,
+)
+
 ## ==> GLOBALS
 GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True
@@ -24,7 +92,8 @@ GLOBAL_TITLE_BAR = True
 ## ==> COUT INITIAL MENU
 count = 1
 
-class UIFunctions(MainWindow):
+
+class UIFunctions(QMainWindow):
 
     ## ==> GLOBALS
     GLOBAL_STATE = 0
@@ -44,17 +113,23 @@ class UIFunctions(MainWindow):
             GLOBAL_STATE = 1
             self.ui.horizontalLayout.setContentsMargins(0, 0, 0, 0)
             self.ui.btn_maximize_restore.setToolTip("Restore")
-            self.ui.btn_maximize_restore.setIcon(QtGui.QIcon(u":/16x16/icons/16x16/cil-window-restore.png"))
+            self.ui.btn_maximize_restore.setIcon(
+                QIcon(u":/16x16/icons/16x16/cil-window-restore.png")
+            )
             self.ui.frame_top_btns.setStyleSheet("background-color: rgb(27, 29, 35)")
             self.ui.frame_size_grip.hide()
         else:
             GLOBAL_STATE = 0
             self.showNormal()
-            self.resize(self.width()+1, self.height()+1)
+            self.resize(self.width() + 1, self.height() + 1)
             self.ui.horizontalLayout.setContentsMargins(10, 10, 10, 10)
             self.ui.btn_maximize_restore.setToolTip("Maximize")
-            self.ui.btn_maximize_restore.setIcon(QtGui.QIcon(u":/16x16/icons/16x16/cil-window-maximize.png"))
-            self.ui.frame_top_btns.setStyleSheet("background-color: rgba(27, 29, 35, 200)")
+            self.ui.btn_maximize_restore.setIcon(
+                QIcon(u":/16x16/icons/16x16/cil-window-maximize.png")
+            )
+            self.ui.frame_top_btns.setStyleSheet(
+                "background-color: rgba(27, 29, 35, 200)"
+            )
             self.ui.frame_size_grip.show()
 
     ## ==> RETURN STATUS
@@ -69,11 +144,10 @@ class UIFunctions(MainWindow):
     ## ==> ENABLE MAXIMUM SIZE
     ########################################################################
     def enableMaximumSize(self, width, height):
-        if width != '' and height != '':
+        if width != "" and height != "":
             self.setMaximumSize(QSize(width, height))
             self.ui.frame_size_grip.hide()
             self.ui.btn_maximize_restore.hide()
-
 
     ## ==> TOGGLE MENU
     ########################################################################
@@ -91,11 +165,13 @@ class UIFunctions(MainWindow):
                 widthExtended = standard
 
             # ANIMATION
-            self.animation = QPropertyAnimation(self.ui.frame_left_menu, b"minimumWidth")
+            self.animation = QPropertyAnimation(
+                self.ui.frame_left_menu, b"minimumWidth"
+            )
             self.animation.setDuration(300)
             self.animation.setStartValue(width)
             self.animation.setEndValue(widthExtended)
-            self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+            self.animation.setEasingCurve(QEasingCurve.InOutQuart)
             self.animation.start()
 
     ## ==> SET TITLE BAR
@@ -119,7 +195,7 @@ class UIFunctions(MainWindow):
     def addNewMenu(self, name, objName, icon, isTopMenu):
         font = QFont()
         font.setFamily(u"Segoe UI")
-        button = QPushButton(str(count),self)
+        button = QPushButton(str(count), self)
         button.setObjectName(objName)
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
@@ -129,7 +205,8 @@ class UIFunctions(MainWindow):
         button.setMinimumSize(QSize(0, 70))
         button.setLayoutDirection(Qt.LeftToRight)
         button.setFont(font)
-        button.setStyleSheet(Style.style_bt_standard.replace('ICON_REPLACE', icon))
+        # FIXME
+        # button.setStyleSheet(Style.style_bt_standard.replace("ICON_REPLACE", icon))
         button.setText(name)
         button.setToolTip(name)
         button.clicked.connect(self.Button)
@@ -148,7 +225,9 @@ class UIFunctions(MainWindow):
 
     ## ==> DESELECT
     def deselectMenu(getStyle):
-        deselect = getStyle.replace("QPushButton { border-right: 7px solid rgb(44, 49, 60); }", "")
+        deselect = getStyle.replace(
+            "QPushButton { border-right: 7px solid rgb(44, 49, 60); }", ""
+        )
         return deselect
 
     ## ==> START SELECTION
@@ -165,7 +244,7 @@ class UIFunctions(MainWindow):
 
     ## ==> CHANGE PAGE LABEL TEXT
     def labelPage(self, text):
-        newText = '| ' + text.upper()
+        newText = "| " + text.upper()
         self.ui.label_top_info_2.setText(newText)
 
     ## ==> USER ICON
@@ -180,7 +259,7 @@ class UIFunctions(MainWindow):
                 style = self.ui.label_user_icon.styleSheet()
                 setIcon = "QLabel { background-image: " + icon + "; }"
                 self.ui.label_user_icon.setStyleSheet(style + setIcon)
-                self.ui.label_user_icon.setText('')
+                self.ui.label_user_icon.setText("")
                 self.ui.label_user_icon.setToolTip(initialsTooltip)
         else:
             self.ui.label_user_icon.hide()
@@ -188,7 +267,6 @@ class UIFunctions(MainWindow):
     ########################################################################
     ## END - GUI FUNCTIONS
     ########################################################################
-
 
     ########################################################################
     ## START - GUI DEFINITIONS
@@ -199,14 +277,16 @@ class UIFunctions(MainWindow):
     def uiDefinitions(self):
         def dobleClickMaximizeRestore(event):
             # IF DOUBLE CLICK CHANGE STATUS
-            if event.type() == QtCore.QEvent.MouseButtonDblClick:
-                QtCore.QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
+            if event.type() == QEvent.MouseButtonDblClick:
+                QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
 
         ## REMOVE ==> STANDARD TITLE BAR
         if GLOBAL_TITLE_BAR:
-            self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-            self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-            self.ui.frame_label_top_btns.mouseDoubleClickEvent = dobleClickMaximizeRestore
+            self.setWindowFlags(Qt.FramelessWindowHint)
+            self.setAttribute(Qt.WA_TranslucentBackground)
+            self.ui.frame_label_top_btns.mouseDoubleClickEvent = (
+                dobleClickMaximizeRestore
+            )
         else:
             self.ui.horizontalLayout.setContentsMargins(0, 0, 0, 0)
             self.ui.frame_label_top_btns.setContentsMargins(8, 0, 0, 5)
@@ -214,7 +294,6 @@ class UIFunctions(MainWindow):
             self.ui.frame_icon_top_bar.hide()
             self.ui.frame_btns_right.hide()
             self.ui.frame_size_grip.hide()
-
 
         ## SHOW ==> DROP SHADOW
         self.shadow = QGraphicsDropShadowEffect(self)
@@ -226,17 +305,20 @@ class UIFunctions(MainWindow):
 
         ## ==> RESIZE WINDOW
         self.sizegrip = QSizeGrip(self.ui.frame_size_grip)
-        self.sizegrip.setStyleSheet("width: 20px; height: 20px; margin 0px; padding: 0px;")
+        self.sizegrip.setStyleSheet(
+            "width: 20px; height: 20px; margin 0px; padding: 0px;"
+        )
 
         ### ==> MINIMIZE
         self.ui.btn_minimize.clicked.connect(lambda: self.showMinimized())
 
         ## ==> MAXIMIZE/RESTORE
-        self.ui.btn_maximize_restore.clicked.connect(lambda: UIFunctions.maximize_restore(self))
+        self.ui.btn_maximize_restore.clicked.connect(
+            lambda: UIFunctions.maximize_restore(self)
+        )
 
         ## SHOW ==> CLOSE APPLICATION
         self.ui.btn_close.clicked.connect(lambda: self.close())
-
 
     ########################################################################
     ## END - GUI DEFINITIONS
