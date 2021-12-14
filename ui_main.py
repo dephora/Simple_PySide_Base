@@ -834,47 +834,6 @@ class Ui_MainWindow(object):
         self.layout_viewport = QtWidgets.QGridLayout(self.page_home)
         self.layout_viewport.setObjectName("layout_viewport")
 
-        def create_test_layer():
-            """Example vector layer with a single linestring"""
-            layer_info = "LineString?crs=epsg:4326"
-            layer = QgsVectorLayer(layer_info, "MyLine", "memory")
-            pr = layer.dataProvider()
-            linstr = QgsFeature()
-            wkt = "LINESTRING (1 1, 10 15, 40 35)"
-            geom = QgsGeometry.fromWkt(wkt)
-            linstr.setGeometry(geom)
-            pr.addFeatures([linstr])
-            return layer
-
-        self.viewport1 = MapCanvasWidget()
-        self.viewport2 = MapCanvasWidget()
-        self.viewport3 = MapCanvasWidget()
-        self.viewport4 = MapCanvasWidget()
-
-        self.layout_viewport.addWidget(self.viewport1, 0, 0)
-        self.vlayer1 = create_test_layer()
-        self.vlayer1.updateExtents()
-        self.viewport1.add_layer(self.vlayer1)
-        self.viewport1.show()
-
-        self.layout_viewport.addWidget(self.viewport2, 0, 1)
-        self.vlayer2 = create_test_layer()
-        self.vlayer2.updateExtents()
-        self.viewport2.add_layer(self.vlayer2)
-        self.viewport2.show()
-
-        self.layout_viewport.addWidget(self.viewport3, 1, 0)
-        self.vlayer3 = create_test_layer()
-        self.vlayer3.updateExtents()
-        self.viewport3.add_layer(self.vlayer3)
-        self.viewport3.show()
-
-        self.layout_viewport.addWidget(self.viewport4, 1, 1)
-        self.vlayer4 = create_test_layer()
-        self.vlayer4.updateExtents()
-        self.viewport4.add_layer(self.vlayer4)
-        self.viewport4.show()
-
         self.stackedWidget.addWidget(self.page_home)
         self.page_widgets = QtWidgets.QWidget()
         self.page_widgets.setObjectName("page_widgets")

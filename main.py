@@ -80,6 +80,7 @@ from qgis.gui import (
 
 # GUI FILE
 from app_modules import *
+from mapper.mapper_widget import MapCanvasWidget
 
 # IMPORT FUNCTIONS
 from ui_functions import *
@@ -90,6 +91,7 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setup_viewports(self.ui)
 
         ## PRINT ==> SYSTEM
         print("System: " + platform.system())
@@ -283,6 +285,48 @@ class MainWindow(QMainWindow):
     ########################################################################
     ## END ==> APP EVENTS
     ############################## ---/--/--- ##############################
+
+    def setup_viewports(self, ui):
+        def create_test_layer():
+            """Example vector layer with a single linestring"""
+            layer_info = "LineString?crs=epsg:4326"
+            layer = QgsVectorLayer(layer_info, "MyLine", "memory")
+            pr = layer.dataProvider()
+            linstr = QgsFeature()
+            wkt = "LINESTRING (1 1, 10 15, 40 35)"
+            geom = QgsGeometry.fromWkt(wkt)
+            linstr.setGeometry(geom)
+            pr.addFeatures([linstr])
+            return layer
+
+        ui.viewport1 = MapCanvasWidget()
+        ui.viewport2 = MapCanvasWidget()
+        ui.viewport3 = MapCanvasWidget()
+        ui.viewport4 = MapCanvasWidget()
+
+        ui.layout_viewport.addWidget(ui.viewport1, 0, 0)
+        ui.vlayer1 = create_test_layer()
+        ui.vlayer1.updateExtents()
+        ui.viewport1.add_layer(ui.vlayer1)
+        ui.viewport1.show()
+
+        ui.layout_viewport.addWidget(ui.viewport2, 0, 1)
+        ui.vlayer2 = create_test_layer()
+        ui.vlayer2.updateExtents()
+        ui.viewport2.add_layer(ui.vlayer2)
+        ui.viewport2.show()
+
+        ui.layout_viewport.addWidget(ui.viewport3, 1, 0)
+        ui.vlayer3 = create_test_layer()
+        ui.vlayer3.updateExtents()
+        ui.viewport3.add_layer(ui.vlayer3)
+        ui.viewport3.show()
+
+        ui.layout_viewport.addWidget(ui.viewport4, 1, 1)
+        ui.vlayer4 = create_test_layer()
+        ui.vlayer4.updateExtents()
+        ui.viewport4.add_layer(ui.vlayer4)
+        ui.viewport4.show()
 
 
 def create_test_layer():
