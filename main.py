@@ -17,6 +17,7 @@
 import os
 import sys
 import platform
+from PyQt5.QtWidgets import QDockWidget, QListWidget, QTextEdit
 
 # from PySide2 import QtCore, QtGui, QtWidgets
 # from PySide2.QtCore import (
@@ -290,6 +291,10 @@ class MainWindow(QMainWindow):
 
     def setup_viewports(self, ui):
 
+        # ------------------------------------------------------
+        # ---- Layer       -------------------------------------
+        # ------------------------------------------------------
+
         # path = os.path.abspath(os.path.dirname(__file__))
         # path_to_gpkg = os.path.join(path, "beziers.gpkg")
 
@@ -304,6 +309,10 @@ class MainWindow(QMainWindow):
 
         # ui.test_vlayer.updateExtents()
 
+        # ------------------------------------------------------
+        # ---- /Layer       -------------------------------------
+        # ------------------------------------------------------
+
         def create_test_layer():
             """Example vector layer with a single linestring"""
             layer_info = "LineString?crs=epsg:4326"
@@ -316,6 +325,36 @@ class MainWindow(QMainWindow):
             pr.addFeatures([linstr])
             return layer
 
+        # ------------------------------------------------------
+        # ---- DOCK WIDGET -------------------------------------
+        # ------------------------------------------------------
+
+        self.items = QDockWidget("Dockable", self)
+
+        self.listWidget = QListWidget()
+        self.listWidget.addItem("Item1")
+        self.listWidget.addItem("Item2")
+
+        self.items.setWidget(self.listWidget)
+        self.items.setFloating(False)
+        # self.setCentralWidget(QTextEdit())
+        self.addDockWidget(Qt.RightDockWidgetArea, self.items)
+
+        # self.items2 = QDockWidget("Dockable", self)
+
+        # self.listWidget2 = QListWidget()
+        # self.listWidget2.addItem("Item1_2")
+        # self.listWidget2.addItem("Item2_2")
+
+        # self.items2.setWidget(self.listWidget2)
+        # self.items2.setFloating(False)
+        # self.setCentralWidget(QTextEdit())
+        # self.addDockWidget(Qt.LeftDockWidgetArea, self.items2)
+
+        # ------------------------------------------------------
+        # ---- / DOCK WIDGET -------------------------------------
+        # ------------------------------------------------------
+
         ui.vlayer1 = create_test_layer()
         ui.vlayer1.updateExtents()
         ui.viewport1 = MapCanvasWindowNoBar(ui.vlayer1)
@@ -327,6 +366,14 @@ class MainWindow(QMainWindow):
         # ui.viewport1.add_layer(ui.vlayer1)
         # ui.viewport1.add_layer(ui.test_vlayer)
         ui.viewport1.show()
+
+        # ------ viewport dock --------------
+
+        # self.items2.setWidget(ui.viewport1)
+        # self.items2.setFloating(False)
+        # self.addDockWidget(Qt.RightDockWidgetArea, self.items2)
+
+        # --- / viewport dock ---------------
 
         ui.layout_viewport.addWidget(ui.viewport2, 0, 1)
         ui.vlayer2 = create_test_layer()
