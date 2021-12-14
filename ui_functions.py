@@ -16,7 +16,7 @@
 
 ## ==> GUI FILE
 # from main import *
-# from main import MainWindow
+from main import MainWindow
 
 from qgis.PyQt.QtGui import QColor, QPalette, QBrush, QFont, QIcon
 
@@ -93,7 +93,7 @@ GLOBAL_TITLE_BAR = True
 count = 1
 
 
-class UIFunctions(QMainWindow):
+class UIFunctions(MainWindow):
 
     ## ==> GLOBALS
     GLOBAL_STATE = 0

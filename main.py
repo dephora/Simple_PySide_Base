@@ -81,6 +81,9 @@ from qgis.gui import (
 # GUI FILE
 from app_modules import *
 
+# IMPORT FUNCTIONS
+from ui_functions import *
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
