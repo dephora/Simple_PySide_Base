@@ -82,6 +82,7 @@ from qgis.gui import (
 # GUI FILE
 from app_modules import *
 from mapper.mapper_widget import MapCanvasWidget
+from mapper.mapper_window_no_bar import MapCanvasWindowNoBar
 
 # IMPORT FUNCTIONS
 from ui_functions import *
@@ -315,15 +316,15 @@ class MainWindow(QMainWindow):
             pr.addFeatures([linstr])
             return layer
 
-        ui.viewport1 = MapCanvasWidget()
+        ui.vlayer1 = create_test_layer()
+        ui.vlayer1.updateExtents()
+        ui.viewport1 = MapCanvasWindowNoBar(ui.vlayer1)
         ui.viewport2 = MapCanvasWidget()
         ui.viewport3 = MapCanvasWidget()
         ui.viewport4 = MapCanvasWidget()
 
         ui.layout_viewport.addWidget(ui.viewport1, 0, 0)
-        ui.vlayer1 = create_test_layer()
-        ui.vlayer1.updateExtents()
-        ui.viewport1.add_layer(ui.vlayer1)
+        # ui.viewport1.add_layer(ui.vlayer1)
         # ui.viewport1.add_layer(ui.test_vlayer)
         ui.viewport1.show()
 

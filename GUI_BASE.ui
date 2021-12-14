@@ -1120,7 +1120,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset>
+                      <iconset resource="files.qrc">
                        <normaloff>:/icons/16x16/cil-window-minimize.png</normaloff>:/icons/16x16/cil-window-minimize.png</iconset>
                      </property>
                     </widget>
@@ -1164,7 +1164,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset>
+                      <iconset resource="files.qrc">
                        <normaloff>:/icons/16x16/cil-window-maximize.png</normaloff>:/icons/16x16/cil-window-maximize.png</iconset>
                      </property>
                     </widget>
@@ -1208,7 +1208,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset>
+                      <iconset resource="files.qrc">
                        <normaloff>:/icons/16x16/cil-x.png</normaloff>:/icons/16x16/cil-x.png</iconset>
                      </property>
                     </widget>
@@ -1558,7 +1558,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="page_home">
                    <layout class="QGridLayout" name="layout_viewport"/>
@@ -1746,7 +1746,7 @@ QPushButton:pressed {
                                   <string>Open Blender</string>
                                  </property>
                                  <property name="icon">
-                                  <iconset>
+                                  <iconset resource="files.qrc">
                                    <normaloff>:/icons/16x16/cil-folder-open.png</normaloff>:/icons/16x16/cil-folder-open.png</iconset>
                                  </property>
                                 </widget>
@@ -2019,7 +2019,7 @@ QCommandLinkButton:pressed {
                             <string>CommandLinkButton</string>
                            </property>
                            <property name="icon">
-                            <iconset>
+                            <iconset resource="files.qrc">
                              <normaloff>:/icons/16x16/cil-link.png</normaloff>:/icons/16x16/cil-link.png</iconset>
                            </property>
                            <property name="description">

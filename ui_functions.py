@@ -106,15 +106,16 @@ class UIFunctions(MainWindow):
     ## ==> MAXIMIZE/RESTORE
     ########################################################################
     def maximize_restore(self):
+        print(self.ui)
         global GLOBAL_STATE
         status = GLOBAL_STATE
         if status == 0:
             self.showMaximized()
             GLOBAL_STATE = 1
-            self.ui.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+            self.ui.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
             self.ui.btn_maximize_restore.setToolTip("Restore")
             self.ui.btn_maximize_restore.setIcon(
-                QIcon(u":/16x16/icons/16x16/cil-window-restore.png")
+                QIcon(u":/icons/16x16/cil-window-restore.png")
             )
             self.ui.frame_top_btns.setStyleSheet("background-color: rgb(27, 29, 35)")
             self.ui.frame_size_grip.hide()
@@ -122,10 +123,10 @@ class UIFunctions(MainWindow):
             GLOBAL_STATE = 0
             self.showNormal()
             self.resize(self.width() + 1, self.height() + 1)
-            self.ui.horizontalLayout.setContentsMargins(10, 10, 10, 10)
+            self.ui.horizontalLayout_2.setContentsMargins(10, 10, 10, 10)
             self.ui.btn_maximize_restore.setToolTip("Maximize")
             self.ui.btn_maximize_restore.setIcon(
-                QIcon(u":/16x16/icons/16x16/cil-window-maximize.png")
+                QIcon(u":/icons/16x16/cil-window-maximize.png")
             )
             self.ui.frame_top_btns.setStyleSheet(
                 "background-color: rgba(27, 29, 35, 200)"

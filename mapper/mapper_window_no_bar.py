@@ -48,7 +48,7 @@ from qgis.gui import (
 QGSAPP = True
 
 
-class MainWindow(QMainWindow):
+class MapCanvasWindowNoBar(QMainWindow):
     def __init__(self, layer):
         QMainWindow.__init__(self)
 
@@ -103,7 +103,7 @@ class MainWindow(QMainWindow):
 
 
 def create_test_layer():
-    """ Example vector layer with a single linestring"""
+    """Example vector layer with a single linestring"""
     layer_info = "LineString?crs=epsg:4326"
     layer = QgsVectorLayer(layer_info, "MyLine", "memory")
     pr = layer.dataProvider()
@@ -116,7 +116,7 @@ def create_test_layer():
 
 
 def main():
-    """ Sample canvas.
+    """Sample canvas.
 
     https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/canvas.html
     https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/intro.html#using-pyqgis-in-custom-applications
@@ -143,7 +143,7 @@ def main():
     vlayer = create_test_layer()
     vlayer.updateExtents()
 
-    window = MainWindow(vlayer)
+    window = MapCanvasWindowNoBar(vlayer)
     window.show()
 
     window.raise_()  # unsure
