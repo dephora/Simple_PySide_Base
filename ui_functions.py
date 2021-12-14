@@ -16,7 +16,7 @@
 
 ## ==> GUI FILE
 # from main import *
-from main import MainWindow
+# from main import MainWindow
 
 from qgis.PyQt.QtGui import QColor, QPalette, QBrush, QFont, QIcon
 
@@ -73,7 +73,6 @@ from qgis.core import (
     QgsProject,
     QgsGeometry,
     QgsMapRendererJob,
-    StyleCategories,
 )
 
 from qgis.gui import (
@@ -94,7 +93,7 @@ GLOBAL_TITLE_BAR = True
 count = 1
 
 
-class UIFunctions(MainWindow):
+class UIFunctions(QMainWindow):
 
     ## ==> GLOBALS
     GLOBAL_STATE = 0

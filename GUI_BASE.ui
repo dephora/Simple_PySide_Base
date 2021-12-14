@@ -563,10 +563,7 @@ QToolTip {
     <string notr="true">background: transparent;
 color: rgb(210, 210, 210);</string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
+   <layout class="QGridLayout" name="gridLayout_3">
     <property name="leftMargin">
      <number>10</number>
     </property>
@@ -579,7 +576,7 @@ color: rgb(210, 210, 210);</string>
     <property name="bottomMargin">
      <number>10</number>
     </property>
-    <item>
+    <item row="0" column="0">
      <widget class="QFrame" name="frame_main">
       <property name="styleSheet">
        <string notr="true">/* LINE EDIT */
@@ -687,7 +684,7 @@ QCheckBox::indicator:hover {
 QCheckBox::indicator:checked {
     background: 3px solid rgb(52, 59, 72);
 	border: 3px solid rgb(52, 59, 72);	
-	background-image: url(:/16x16/icons/16x16/cil-check-alt.png);
+	background-image: url(:/icons/16x16/cil-check-alt.png);
 }
 
 /* RADIO BUTTON */
@@ -726,7 +723,7 @@ QComboBox::drop-down {
 	border-left-style: solid;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;	
-	background-image: url(:/16x16/icons/16x16/cil-arrow-bottom.png);
+	background-image: url(:/icons/16x16/cil-arrow-bottom.png);
 	background-position: center;
 	background-repeat: no-reperat;
  }
@@ -892,7 +889,7 @@ QSlider::handle:vertical:pressed {
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
-	background-image: url(:/24x24/icons/24x24/cil-menu.png);
+	background-image: url(:/icons/24x24/cil-menu.png);
 	background-position: center;
 	background-repeat: no-reperat;
 	border: none;
@@ -1013,7 +1010,7 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background: transparent;
-background-image: url(:/16x16/icons/16x16/cil-terminal.png);
+background-image: url(:/icons/16x16/cil-terminal.png);
 background-position: center;
 background-repeat: no-repeat;
 </string>
@@ -1123,8 +1120,8 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="files.qrc">
-                       <normaloff>:/16x16/icons/16x16/cil-window-minimize.png</normaloff>:/16x16/icons/16x16/cil-window-minimize.png</iconset>
+                      <iconset>
+                       <normaloff>:/icons/16x16/cil-window-minimize.png</normaloff>:/icons/16x16/cil-window-minimize.png</iconset>
                      </property>
                     </widget>
                    </item>
@@ -1167,8 +1164,8 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="files.qrc">
-                       <normaloff>:/16x16/icons/16x16/cil-window-maximize.png</normaloff>:/16x16/icons/16x16/cil-window-maximize.png</iconset>
+                      <iconset>
+                       <normaloff>:/icons/16x16/cil-window-maximize.png</normaloff>:/icons/16x16/cil-window-maximize.png</iconset>
                      </property>
                     </widget>
                    </item>
@@ -1211,8 +1208,8 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="files.qrc">
-                       <normaloff>:/16x16/icons/16x16/cil-x.png</normaloff>:/16x16/icons/16x16/cil-x.png</iconset>
+                      <iconset>
+                       <normaloff>:/icons/16x16/cil-x.png</normaloff>:/icons/16x16/cil-x.png</iconset>
                      </property>
                     </widget>
                    </item>
@@ -1561,62 +1558,10 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page_home">
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
-                    <item>
-                     <widget class="QLabel" name="label_6">
-                      <property name="font">
-                       <font>
-                        <family>Segoe UI</family>
-                        <pointsize>40</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>HOME</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label">
-                      <property name="font">
-                       <font>
-                        <family>Segoe UI</family>
-                        <pointsize>14</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Empyt Page - By: Wanderson M. Pimenta</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_7">
-                      <property name="font">
-                       <font>
-                        <family>Segoe UI</family>
-                        <pointsize>15</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Page Index 0</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
+                   <layout class="QGridLayout" name="layout_viewport"/>
                   </widget>
                   <widget class="QWidget" name="page_widgets">
                    <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1801,8 +1746,8 @@ QPushButton:pressed {
                                   <string>Open Blender</string>
                                  </property>
                                  <property name="icon">
-                                  <iconset resource="files.qrc">
-                                   <normaloff>:/16x16/icons/16x16/cil-folder-open.png</normaloff>:/16x16/icons/16x16/cil-folder-open.png</iconset>
+                                  <iconset>
+                                   <normaloff>:/icons/16x16/cil-folder-open.png</normaloff>:/icons/16x16/cil-folder-open.png</iconset>
                                  </property>
                                 </widget>
                                </item>
@@ -2074,8 +2019,8 @@ QCommandLinkButton:pressed {
                             <string>CommandLinkButton</string>
                            </property>
                            <property name="icon">
-                            <iconset resource="files.qrc">
-                             <normaloff>:/16x16/icons/16x16/cil-link.png</normaloff>:/16x16/icons/16x16/cil-link.png</iconset>
+                            <iconset>
+                             <normaloff>:/icons/16x16/cil-link.png</normaloff>:/icons/16x16/cil-link.png</iconset>
                            </property>
                            <property name="description">
                             <string>Open External Link</string>
@@ -2421,7 +2366,7 @@ QHeaderView::section:vertical
                           <bool>false</bool>
                          </property>
                          <attribute name="horizontalHeaderVisible">
-                          <bool>true</bool>
+                          <bool>false</bool>
                          </attribute>
                          <attribute name="horizontalHeaderCascadingSectionResizes">
                           <bool>true</bool>
@@ -2696,7 +2641,7 @@ QHeaderView::section:vertical
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QSizeGrip {
-	background-image: url(:/16x16/icons/16x16/cil-size-grip.png);
+	background-image: url(:/icons/16x16/cil-size-grip.png);
 	background-position: center;
 	background-repeat: no-reperat;
 }</string>

@@ -125,20 +125,20 @@ class MainWindow(QMainWindow):
         ## ==> ADD CUSTOM MENUS
         self.ui.stackedWidget.setMinimumWidth(20)
         UIFunctions.addNewMenu(
-            self, "HOME", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True
+            self, "HOME", "btn_home", "url(:/icons/16x16/cil-home.png)", True
         )
         UIFunctions.addNewMenu(
             self,
-            "Add User",
+            "Users",
             "btn_new_user",
-            "url(:/16x16/icons/16x16/cil-user-follow.png)",
+            "url(:/icons/16x16/cil-user-follow.png)",
             True,
         )
         UIFunctions.addNewMenu(
             self,
-            "Custom Widgets",
+            "Widgets",
             "btn_widgets",
-            "url(:/16x16/icons/16x16/cil-equalizer.png)",
+            "url(:/icons/16x16/cil-equalizer.png)",
             False,
         )
         ## ==> END ##
@@ -283,7 +283,7 @@ class MainWindow(QMainWindow):
 
 
 def create_test_layer():
-    """ Example vector layer with a single linestring"""
+    """Example vector layer with a single linestring"""
     layer_info = "LineString?crs=epsg:4326"
     layer = QgsVectorLayer(layer_info, "MyLine", "memory")
     pr = layer.dataProvider()
@@ -296,7 +296,7 @@ def create_test_layer():
 
 
 def main():
-    """ Sample canvas.
+    """Sample canvas.
 
     https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/canvas.html
     https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/intro.html#using-pyqgis-in-custom-applications
