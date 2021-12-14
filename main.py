@@ -14,6 +14,7 @@
 ##
 ################################################################################
 
+import os
 import sys
 import platform
 
@@ -287,6 +288,21 @@ class MainWindow(QMainWindow):
     ############################## ---/--/--- ##############################
 
     def setup_viewports(self, ui):
+
+        # path = os.path.abspath(os.path.dirname(__file__))
+        # path_to_gpkg = os.path.join(path, "beziers.gpkg")
+
+        # gpkg_countries_layer = path_to_gpkg + "|layername=beziers"
+        # ui.test_vlayer = QgsVectorLayer(
+        #     gpkg_countries_layer,
+        #     "beziers",
+        #     "ogr",
+        # )
+        # if not ui.test_vlayer.isValid():
+        #     print("Layer failed to load!")
+
+        # ui.test_vlayer.updateExtents()
+
         def create_test_layer():
             """Example vector layer with a single linestring"""
             layer_info = "LineString?crs=epsg:4326"
@@ -308,6 +324,7 @@ class MainWindow(QMainWindow):
         ui.vlayer1 = create_test_layer()
         ui.vlayer1.updateExtents()
         ui.viewport1.add_layer(ui.vlayer1)
+        # ui.viewport1.add_layer(ui.test_vlayer)
         ui.viewport1.show()
 
         ui.layout_viewport.addWidget(ui.viewport2, 0, 1)
